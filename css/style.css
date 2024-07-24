@@ -2462,6 +2462,7 @@ label:hover:before {
 
 .ps-product--standard .ps-product__thumbnail {
   width: 60% !important;
+  height: 50% !important;
   margin: 0 auto 30px;
 }
 

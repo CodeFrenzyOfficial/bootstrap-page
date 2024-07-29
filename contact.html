@@ -85,16 +85,18 @@
                 <h2 class="page__title">About Us</h2>
                 <div class="contact__content">
                     <div class="row">
+                        <div class="col-12 col-lg-12">
+                            <p>
+                                With over 15 years of dedicated experience in the industry, I have built a reputation for supplying top-tier brand products to wholesalers and trade clients. My extensive network and deep understanding of the market allow me to offer a diverse range of products, ensuring that my clients have access to the best brands at competitive prices. Specializing in bulk sales, I leverage my expertise to secure the maximum discounts, helping my clients optimize their purchasing power and profitability. My commitment to quality, reliability, and exceptional customer service has made me a trusted partner in the industry.
+                            </p>
+                            <!-- <p>I have been in the industry for 15 years supplying all major brand products to wholesaler and trade, we specialise in bulk sales for the maximum discount.
+                            </p> -->
+                            <p>Please get intouch with your requirements or offer</p>
+                            
+                        </div>
                         <div class="col-12 col-lg-7">
                             <div class="row">
-                                <div class="col-12 col-lg-12">
-                                    <p>
-                                        With over 15 years of dedicated experience in the industry, I have built a reputation for supplying top-tier brand products to wholesalers and trade clients. My extensive network and deep understanding of the market allow me to offer a diverse range of products, ensuring that my clients have access to the best brands at competitive prices. Specializing in bulk sales, I leverage my expertise to secure the maximum discounts, helping my clients optimize their purchasing power and profitability. My commitment to quality, reliability, and exceptional customer service has made me a trusted partner in the industry.
-                                    </p>
-                                    <!-- <p>I have been in the industry for 15 years supplying all major brand products to wholesaler and trade, we specialise in bulk sales for the maximum discount.
-                                    </p> -->
-                                    <p>Please get intouch with your requirements or offer</p>
-                                </div>
+                                
                                 <div class="col-12 col-md-12">
                                     <h3 class="contact__title">For Enquiry<br />Contact Info</h3>
                                     <div class="contact__info">
@@ -109,31 +111,33 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-5">
-                            <form>
+                            <form id="frmEmail">
                                 <div class="contact__form">
+                                    <h5 id="txtEmailSent" style="display: none; color: green;">Email has been sent successfuly</h5>
                                     <h3 class="contact__title">Contact Form</h3>
                                     <p>please send us a message by filling out the form below and we will get back with you shortly.</p>
                                     <div class="form-row">
                                         <div class="col-12 form-group--block">
                                             <label>Name: <span>*</span></label>
-                                            <input class="form-control" type="text" required>
+                                            <input id="txtName" class="form-control" type="text" required>
                                         </div>
                                         <div class="col-12 form-group--block">
                                             <label>Email: <span>*</span></label>
-                                            <input class="form-control" type="text" required>
+                                            <input id="txtEmail" class="form-control" type="email" required>
                                         </div>
                                         <div class="col-12 form-group--block">
-                                            <label>Subject (optional): </label>
-                                            <input class="form-control" type="text" required>
+                                            <label>Subject : <span>*</span></label>
+                                            <input id ="txtSubject" class="form-control" type="text" required>
                                         </div>
                                         <div class="col-12 form-group--block">
                                             <label>Message: <span>*</span></label>
-                                            <textarea class="form-control"></textarea>
+                                            <textarea  id="txtMessage" class="form-control" required></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <button class="btn ps-button contact__send">Send Message</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -217,6 +221,36 @@
     <script src="plugins/noUiSlider/nouislider.min.js"></script>
     <!-- custom code-->
     <script src="js/main.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script>
+ 
+$('#frmEmail').submit(function(e){
+    e.preventDefault();
+    debugger;
+    var templateParams = {
+            from_name: $('#txtName').val(),
+            reply_to: $('#txtEmail').val(),
+            message:$('#txtMessage').val(),
+            from_sub:$('#txtSubject').val()
+};
+    emailjs.send('service_c2zf9mb', 'template_vn77m0i', templateParams,'joHfKsSeRMHMIZYUk').then(
+  (response) => {
+    $('#txtEmailSent').show();
+            $('#txtName').val('');
+            $('#txtEmail').val('');
+            $('#txtMessage').val('');
+            $('#txtSubject').val('');
+    console.log('SUCCESS!', response.status, response.text);
+  },
+  (error) => {
+    console.log('FAILED...', error);
+  },
+);
+});
+
+    </script>
 </body>
 
 </html>
